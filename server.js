@@ -1,7 +1,6 @@
 const dotenv = require("dotenv");
 dotenv.config();
-const { DEV_ENV, NODE_ENV } = require("./src/utils/constants.js");
-if (!DEV_ENV) dotenv.config({ path: "./.env.prod", override: true });
+const { NODE_ENV } = require("./src/utils/constants.js");
 const dayjs = require("dayjs");
 
 const app = require("./app");
