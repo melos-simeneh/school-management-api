@@ -31,7 +31,7 @@ services:
 
   school-api:
     build: .
-    container_name: school-api-container
+    container_name: school-api
     image: school-api-image:latest
     command: ["npm", "start"]
     ports:
