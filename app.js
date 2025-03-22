@@ -22,7 +22,7 @@ app.use(outgoingResponse);
 
 //welcome route
 app.get("/", (req, res) => {
-  res.send({ message: "Welcome to School Management API" });
+  res.json({ status: "SUCCESS", message: "Welcome to School Management API" });
 });
 
 app.use("/docs", setupSwagger());
