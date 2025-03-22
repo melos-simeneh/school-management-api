@@ -150,7 +150,7 @@ The distance between the provided latitude/longitude and the school's latitude/l
 - Docker
 - Docker Compose
 
-## Steps to Run
+### Steps to Run
 
 1. **Clone the repository**:
 
@@ -187,7 +187,7 @@ The distance between the provided latitude/longitude and the school's latitude/l
    docker-compose down
    ```
 
-## API Documentation via Swagger
+### API Documentation via Swagger
 
 Once the server is running, you can access the Swagger UI to view and test the API endpoints:
 
