@@ -1,0 +1,63 @@
+version: "3.8"
+services:
+  school-db:
+    image: mysql:8
+    container_name: school-api-mysql-db
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=school_management
+      - MYSQL_ROOT_PASSWORD=melos@1234
+    volumes:
+      - school-db-data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-u",
+          "root",
+          "-pmelos@1234",
+        ]
+      interval: 10s
+      timeout: 20s
+      retries: 30
+    networks:
+      - school-api-network
+
+  school-api:
+    build: .
+    container_name: school-api-container
+    image: school-api-image:latest
+    command: ["npm", "start"]
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DB_HOST=school-db
+      - DB_USER=root
+      - DB_PASSWORD=melos@1234
+      - DB_NAME=school_management
+      - DB_PORT=3306
+    volumes:
+      - ./logs:/app/logs
+    depends_on:
+      school-db:
+        condition: service_healthy
+    networks:
+      - school-api-network
+
+networks:
+  school-api-network:
+    name: school-api-network
+
+volumes:
+  school-db-data:
+    name: "school-api-db-volume"
+    driver: local

@@ -1,4 +1,5 @@
 const { DEV_ENV } = require("./constants.js");
+const { log_error } = require("./logger.js");
 
 const handleErrorResponse = (
   res,
