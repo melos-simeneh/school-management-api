@@ -31,7 +31,12 @@ const getLogFileName = (url, type) => {
   return `school_mgt_${type}_log_${today()}.log`;
 };
 
+const swaggerUrlPattern = "/docs";
 exports.incomingRequests = async (req, res, next) => {
+  if (req.originalUrl.startsWith(swaggerUrlPattern)) {
+    return next();
+  }
+
   const url = req.originalUrl;
   const logEntry = {
     timestamp: timestamp(),
@@ -51,6 +56,10 @@ exports.incomingRequests = async (req, res, next) => {
 };
 
 exports.outgoingResponse = async (req, res, next) => {
+  if (req.originalUrl.startsWith(swaggerUrlPattern)) {
+    return next();
+  }
+
   const startTime = Date.now();
   let isLogged = false;
 

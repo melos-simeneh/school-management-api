@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const schoolRoutes = require("./src/routes/school.routes.js");
+const { setupSwagger } = require("./src/utils/swagger.config.js");
 const {
   log_error,
   incomingRequests,
@@ -19,11 +20,8 @@ app.use(morgan("tiny"));
 app.use(incomingRequests);
 app.use(outgoingResponse);
 
-//welcome route
-app.get("/", (req, res) => {
-  const message = { message: "Welcome to School Management API" };
-  res.send(message);
-});
+app.use("/docs", setupSwagger());
+
 app.use("/api", schoolRoutes);
 
 // Error handling middleware for unhandled errors

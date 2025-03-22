@@ -17,7 +17,7 @@ exports.addSchool = async (req, res) => {
     }
 
     await school_service.saveSchool({ name, address, latitude, longitude });
-    return res.status(200).json({
+    return res.status(201).json({
       status: "SUCCESS",
       message: "School Added Successfully",
     });

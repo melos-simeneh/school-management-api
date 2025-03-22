@@ -7,7 +7,6 @@ services:
     ports:
       - "3306:3306"
     environment:
-      - MYSQL_DATABASE=school_management
       - MYSQL_ROOT_PASSWORD=melos@1234
     volumes:
       - school-db-data:/var/lib/mysql
@@ -22,7 +21,7 @@ services:
           "localhost",
           "-u",
           "root",
-          "-pmelos@1234",
+          "-p$$MYSQL_ROOT_PASSWORD",
         ]
       interval: 10s
       timeout: 20s
@@ -42,7 +41,7 @@ services:
       - PORT=3000
       - DB_HOST=school-db
       - DB_USER=root
-      - DB_PASSWORD=melos@1234
+      - DB_PASSWORD=$$MYSQL_ROOT_PASSWORD
       - DB_NAME=school_management
       - DB_PORT=3306
     volumes:
