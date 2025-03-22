@@ -16,7 +16,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /addSchool:
+ * /api/v1/addSchool:
  *   post:
  *     summary: Adds a new school to the system
  *     description: This endpoint allows you to add a new school to the system by providing the name, address, latitude, and longitude. It checks if the school name already exists and validates that latitude and longitude are within acceptable ranges.
@@ -93,7 +93,7 @@ router.post(
 
 /**
  * @swagger
- * /listSchools:
+ * /api/v1/listSchools:
  *   get:
  *     summary: Retrieves a list of schools sorted by proximity to the given coordinates.
  *     description: This endpoint retrieves all schools, sorted by distance from the provided latitude and longitude. The list will include calculated distances to each school, sorted in ascending order of proximity.
